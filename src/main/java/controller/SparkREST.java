@@ -60,6 +60,12 @@ public class SparkREST {
             return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS, "User Deleted"));
         });
 
+        options("/users/:id", (request, response) -> {
+            response.type("application/json");
+
+            return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS, (userService.userExist(request.params(":id"))) ? "User Exists" : "User does not exist"));
+        });
+
 
     }
 }
