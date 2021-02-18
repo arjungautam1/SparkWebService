@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserServices {
             if (forEdit.getId() == null)
                 throw new UserException("ID cannot be blank ");
 
-            User toEdit = userHashMap.get(forEdit.getEmail());
+            User toEdit = userHashMap.get(forEdit.getId());
 
             if (toEdit == null) throw new UserException("User not Found");
 

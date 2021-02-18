@@ -33,6 +33,26 @@ public class SparkREST {
             return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS, new Gson().toJsonTree(userService.getUsers())));
         });
 
+        /* Get User */
+        get("/user/:id", (request, response) -> {
+            response.type("application/json");
+            return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS, new Gson().toJsonTree(userService.getUser(request.params(":id")))));
+        });
+
+        /* Edit User */
+        put("/users/:id", (request, response) -> {
+            response.type("application/json");
+
+            User toEdit = new Gson().fromJson(request.body(), User.class);
+            User editedUser = userService.editUser(toEdit);
+
+            if (editedUser != null) {
+                return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS, new Gson().toJsonTree(editedUser)));
+            } else {
+                return new Gson().toJson(new StandardResponse(StatusResponse.ERROR, new Gson().toJsonTree("User not Found or error in edit")));
+            }
+        });
+
 
     }
 }
