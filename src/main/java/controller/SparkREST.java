@@ -53,6 +53,13 @@ public class SparkREST {
             }
         });
 
+        /* For Delete User */
+        delete("/users/:id", (request, response) -> {
+            response.type("application/json");
+            userService.deleteUser(request.params(":id"));
+            return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS, "User Deleted"));
+        });
+
 
     }
 }
