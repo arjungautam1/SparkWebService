@@ -26,5 +26,13 @@ public class SparkREST {
             userService.addUser(user);
             return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS));
         });
+
+        /* Get User */
+        get("/users", (request, response) -> {
+            response.type("application/json");
+            return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS, new Gson().toJsonTree(userService.getUsers())));
+        });
+
+
     }
 }
